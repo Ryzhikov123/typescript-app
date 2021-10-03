@@ -1,0 +1,46 @@
+.sign-up-page {
+  width: 30%;
+  height: 80%;
+  margin: 0 auto;
+  //   padding: 5% 0 5% 0;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  p {
+    margin-bottom: 45px;
+  }
+  form {
+    width: 80%;
+    .name-info {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      #basic_firstName {
+        border-radius: 10px 0 0 10px;
+      }
+      #basic_lastName {
+        border-radius: 0 10px 10px 0;
+      }
+    }
+    input,
+    span,
+    .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+      border-radius: 10px;
+    }
+    .ant-form-item-control {
+      margin: 0;
+    }
+    .ant-col-16 {
+      max-width: 100%;
+    }
+    .ant-btn {
+      height: 40px;
+      width: 100%;
+      border-radius: 10px;
+      margin: 15px 0px;
+    }
+  }
+}

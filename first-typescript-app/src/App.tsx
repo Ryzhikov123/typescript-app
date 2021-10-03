@@ -6,9 +6,13 @@ import {
   Redirect,
   useHistory,
 } from 'react-router-dom';
-import { DashboardPage } from './components/pages/dashboard';
-import { SignIn } from './components/pages/signIn';
-import { SignUp } from './components/pages/signUp';
+import { CartPage } from './components/pages/Cart';
+import { DashboardPage } from './components/pages/Dashboard/index';
+import { OrderPage } from './components/pages/Order';
+import { ProductsPage } from './components/pages/Products';
+import { SignIn } from './components/pages/SignIn';
+import { SignUp } from './components/pages/SignUp';
+import { UserContextProvider } from './context/userContext';
 
 const Routes = () => {
   const history = useHistory();
@@ -16,8 +20,6 @@ const Routes = () => {
   useEffect(() => {
     if (!token) {
       history.push('/signIn');
-    } else {
-      history.push('/dashboard');
     }
   }, [token]);
   return (
@@ -26,6 +28,9 @@ const Routes = () => {
       <Route exact path="/signIn" component={SignIn} />
       <Route exact path="/signUp" component={SignUp} />
       <Route exact path="/dashboard" component={DashboardPage} />
+      <Route exact path="/products" component={ProductsPage} />
+      <Route exact path="/cart" component={CartPage} />
+      <Route exact path="/order" component={OrderPage} />
     </Switch>
   );
 };
@@ -33,9 +38,11 @@ const Routes = () => {
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes />
-      </Router>
+      <UserContextProvider>
+        <Router>
+          <Routes />
+        </Router>
+      </UserContextProvider>
     </div>
   );
 }

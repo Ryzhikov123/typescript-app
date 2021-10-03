@@ -1,0 +1,16 @@
+.products-page {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    .ant-card {
+      width: 20%;
+    }
+  }
+}
+
+.ant-space {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 50vh;
+}

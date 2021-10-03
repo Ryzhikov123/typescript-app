@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import './styles.scss';
 
 export const SignIn = () => {
   const history = useHistory();
@@ -28,34 +29,37 @@ export const SignIn = () => {
   };
 
   return (
-    <div className="sign-in-page">
-      <Form
-        name="basic"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[{ required: true, message: 'Please input your email!' }]}
+    <div className="container">
+      <div className="sign-in-page">
+        <h1>Sign in</h1>
+        <Form
+          name="basic"
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
         >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
-        >
-          <Input.Password />
-        </Form.Item>
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-        <Link to="/signUp">Go to Sign up</Link>
-      </Form>
+          <Form.Item
+            name="email"
+            rules={[{ required: true, message: 'Please input your email!' }]}
+          >
+            <Input placeholder="E-mail" />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[{ required: true, message: 'Please input your password!' }]}
+          >
+            <Input.Password placeholder="Password" />
+          </Form.Item>
+          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+            <Button type="primary" htmlType="submit">
+              Log In
+            </Button>
+          </Form.Item>
+          <p>
+            Don't have an account? <Link to="/signUp">Go to Sign up</Link>
+          </p>
+        </Form>
+      </div>
     </div>
   );
 };

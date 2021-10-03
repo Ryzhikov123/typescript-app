@@ -1,25 +1,18 @@
 import React from 'react';
-import { Layout, Button } from 'antd';
-
-const { Header, Footer, Sider, Content } = Layout;
+import { useContext } from 'react';
+import { UserContext } from '../../../context/userContext';
+import { PageWrapper } from '../../wrappers/PageWrapper';
 
 export const DashboardPage = () => {
-  const signOut = () => {
-    localStorage.clear();
-    window.location.reload();
-  };
+  const { user } = useContext(UserContext);
   return (
-    <div className="dashboard-page">
-      <Layout>
-        <Header>
-          <Button onClick={signOut}>Sign out</Button>
-        </Header>
-        <Layout>
-          <Sider>Sider</Sider>
-          <Content>Content</Content>
-        </Layout>
-        <Footer>Footer</Footer>
-      </Layout>
-    </div>
+    <PageWrapper>
+      <div className="dashboard-page">
+        <h1>Dashboard</h1>
+        <div>
+          Hello, {user?.lastName} {user?.firstName} ({user?.roles.join(',')})
+        </div>
+      </div>
+    </PageWrapper>
   );
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import './styles.scss';
 const { Option } = Select;
 
 export const SignUp = () => {
@@ -44,66 +45,77 @@ export const SignUp = () => {
   };
 
   return (
-    <div className="sign-up-page">
-      <Form
-        name="basic"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-        <Form.Item
-          label="First Name"
-          name="firstName"
-          rules={[{ required: true, message: 'Please input your First Name!' }]}
+    <div className="container">
+      <div className="sign-up-page">
+        <h1>Create account</h1>
+        <p>
+          Already have an account? <Link to="/signIn">Go to Sign In</Link>
+        </p>
+        <Form
+          name="basic"
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
         >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Last Name"
-          name="lastName"
-          rules={[{ required: true, message: 'Please input your Last Name!' }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[{ required: true, message: 'Please input your email!' }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
-        >
-          <Input.Password />
-        </Form.Item>
-        <Form.Item name="gender" label="Gender" rules={[{ required: true }]}>
-          <Select
-            placeholder="Select a option and change input text above"
-            onChange={onGenderChange}
-            allowClear
+          <div className="name-info">
+            <Form.Item
+              // label="First Name"
+              name="firstName"
+              rules={[
+                { required: true, message: 'Please input your First Name!' },
+              ]}
+            >
+              <Input placeholder='First Name' />
+            </Form.Item>
+            <Form.Item
+              // label="Last Name"
+              name="lastName"
+              rules={[
+                { required: true, message: 'Please input your Last Name!' },
+              ]}
+            >
+              <Input placeholder='Last Name'/>
+            </Form.Item>
+          </div>
+          <Form.Item
+            // label="Email"
+            name="email"
+            rules={[{ required: true, message: 'Please input your email!' }]}
           >
-            <Option value="male">male</Option>
-            <Option value="female">female</Option>
-            <Option value="other">other</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item
-          label="Phone"
-          name="phone"
-          rules={[{ required: true, message: 'Please input your phone!' }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-        <Link to="/signIn">Go to Sign in</Link>
-      </Form>
+            <Input placeholder='E-mail'/>
+          </Form.Item>
+          <Form.Item
+            // label="Password"
+            name="password"
+            rules={[{ required: true, message: 'Please input your password!' }]}
+          >
+            <Input.Password placeholder='Password'/>
+          </Form.Item>
+          <Form.Item name="gender" rules={[{ required: true }]}>
+            <Select
+              placeholder="Select gender"
+              onChange={onGenderChange}
+              allowClear
+            >
+              <Option value="male">male</Option>
+              <Option value="female">female</Option>
+              <Option value="other">other</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item
+            // label="Phone"
+            name="phone"
+            rules={[{ required: true, message: 'Please input your phone!' }]}
+          >
+            <Input placeholder='Phone'/>
+          </Form.Item>
+          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+            <Button type="primary" htmlType="submit">
+              Create
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 };
