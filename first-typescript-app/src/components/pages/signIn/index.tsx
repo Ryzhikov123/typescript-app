@@ -3,6 +3,7 @@ import { Form, Input, Button } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './styles.scss';
+import { openErrorNotification } from '../../../utils';
 
 export const SignIn = () => {
   const history = useHistory();
@@ -21,7 +22,12 @@ export const SignIn = () => {
           history.push('/dashboard');
         }
       })
-      .catch((err) => console.log('Error: ', err));
+      .catch((err) =>
+        openErrorNotification(
+          err.response.data.error,
+          err.response.data.message
+        )
+      );
   };
 
   const onFinishFailed = (errorInfo: any) => {

@@ -9,6 +9,7 @@ import {
 import { CartPage } from './components/pages/Cart';
 import { DashboardPage } from './components/pages/Dashboard/index';
 import { OrderPage } from './components/pages/Order';
+import { ProductPage } from './components/pages/Product';
 import { ProductsPage } from './components/pages/Products';
 import { SignIn } from './components/pages/SignIn';
 import { SignUp } from './components/pages/SignUp';
@@ -29,8 +30,10 @@ const Routes = () => {
       <Route exact path="/signUp" component={SignUp} />
       <Route exact path="/dashboard" component={DashboardPage} />
       <Route exact path="/products" component={ProductsPage} />
+      <Route exact path="/products/:id" component={ProductPage} />
       <Route exact path="/cart" component={CartPage} />
       <Route exact path="/order" component={OrderPage} />
+      <Route component={() => <>404: Page not found</>} />
     </Switch>
   );
 };

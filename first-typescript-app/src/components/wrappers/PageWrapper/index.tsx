@@ -3,7 +3,7 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import React from 'react';
 import { LeftMenu } from '../../blocks/LeftMenu';
 import './styles.scss';
-import { NavBar } from '../NavBar';
+import { NavBar } from '../../blocks/NavBar';
 import { type } from 'os';
 
 const { Header, Content } = Layout;

@@ -6,11 +6,14 @@ import {
   UploadOutlined,
 } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import { PropsState } from '../../types/types';
+
+type IProps = {
+  collapsed: boolean;
+};
 
 const { Sider } = Layout;
 
-export const LeftMenu = ({ collapsed }: PropsState) => {
+export const LeftMenu = ({ collapsed }: IProps) => {
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <div className="logo" />

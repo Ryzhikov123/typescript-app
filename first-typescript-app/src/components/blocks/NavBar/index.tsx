@@ -1,7 +1,12 @@
 import { Layout, Button } from 'antd';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import React from 'react';
-import { PropsState } from '../../types/types';
+import './styles.scss';
+
+type PropsState = {
+  collapsed: boolean;
+  toggle: () => void;
+};
 
 const { Header } = Layout;
 

@@ -3,6 +3,7 @@ import { Form, Input, Button, Select } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './styles.scss';
+import { openErrorNotification } from '../../../utils';
 const { Option } = Select;
 
 export const SignUp = () => {
@@ -24,7 +25,12 @@ export const SignUp = () => {
         console.log('Response: ', response);
         if (response.status === 201) history.push('/signIn');
       })
-      .catch((err) => console.log('Error: ', err));
+      .catch((err) =>
+        openErrorNotification(
+          err.response.data.error,
+          err.response.data.message
+        )
+      );
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -65,7 +71,7 @@ export const SignUp = () => {
                 { required: true, message: 'Please input your First Name!' },
               ]}
             >
-              <Input placeholder='First Name' />
+              <Input placeholder="First Name" />
             </Form.Item>
             <Form.Item
               // label="Last Name"
@@ -74,7 +80,7 @@ export const SignUp = () => {
                 { required: true, message: 'Please input your Last Name!' },
               ]}
             >
-              <Input placeholder='Last Name'/>
+              <Input placeholder="Last Name" />
             </Form.Item>
           </div>
           <Form.Item
@@ -82,14 +88,14 @@ export const SignUp = () => {
             name="email"
             rules={[{ required: true, message: 'Please input your email!' }]}
           >
-            <Input placeholder='E-mail'/>
+            <Input placeholder="E-mail" />
           </Form.Item>
           <Form.Item
             // label="Password"
             name="password"
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
-            <Input.Password placeholder='Password'/>
+            <Input.Password placeholder="Password" />
           </Form.Item>
           <Form.Item name="gender" rules={[{ required: true }]}>
             <Select
@@ -107,7 +113,7 @@ export const SignUp = () => {
             name="phone"
             rules={[{ required: true, message: 'Please input your phone!' }]}
           >
-            <Input placeholder='Phone'/>
+            <Input placeholder="Phone" />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit">
