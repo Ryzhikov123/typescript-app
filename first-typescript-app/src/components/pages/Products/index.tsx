@@ -28,33 +28,13 @@ export interface IProduct {
 export const ProductsPage = () => {
   const history = useHistory();
   const [products, setProducts] = useState<IProduct[] | null>(null);
+  const [searchNameValue, setSearchNameValue] = useState<string>('');
+  const [searchPriceValue, setSearchPriceValue] = useState<string>('');
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[] | null>(null);
+  const items = filteredProducts !== null? filteredProducts : products;
   const onChangePagination = (pageIndex: number, pageSize?: number) => {
     setProducts(null);
     getProducts({ pageIndex, pageSize });
-  };
-  const onSearchInputName = (value: string) => {
-    products === null ? (
-      <Space size="middle">
-        <Spin size="large" />
-      </Space>
-    ) : (
-      setProducts(
-        products.filter((product: IProduct) => product.name.includes(value))
-      )
-    );
-  };
-  const onSearchInputPrice = (value: string) => {
-    products === null ? (
-      <Space size="middle">
-        <Spin size="large" />
-      </Space>
-    ) : (
-      setProducts(
-        products.filter((product: IProduct) =>
-          product.price.toString().includes(value)
-        )
-      )
-    );
   };
   const getProducts = (pageInfo?: { pageIndex: number; pageSize?: number }) => {
     const query = pageInfo
@@ -70,6 +50,14 @@ export const ProductsPage = () => {
       );
   };
   useEffect(() => getProducts(), []);
+  useEffect(() => {
+    const filteredProducts = products?.filter(
+      (product) =>
+        product.name.includes(searchNameValue) &&
+        String(product.price).includes(searchPriceValue)
+    );
+    filteredProducts && setFilteredProducts(filteredProducts);
+  }, [searchNameValue, searchPriceValue]);
   return (
     <PageWrapper>
       <div className="products-page">
@@ -81,7 +69,8 @@ export const ProductsPage = () => {
               placeholder="input search text"
               enterButton="Search"
               size="large"
-              onSearch={onSearchInputName}
+              value={searchNameValue}
+              onChange={(e) => setSearchNameValue(e.target.value)}
             />
           </div>
           <div className="product__page-input-number">
@@ -89,18 +78,19 @@ export const ProductsPage = () => {
               placeholder="input search number"
               enterButton="Search"
               size="large"
-              onSearch={onSearchInputPrice}
+              value={searchPriceValue}
+              onChange={(e) => setSearchPriceValue(e.target.value)}
             />
           </div>
           <Pagination onChange={onChangePagination} total={300} />
         </div>
         <div className="products-page__list">
-          {products === null ? (
+          {items === null ? (
             <Space size="middle">
               <Spin size="large" />
             </Space>
           ) : (
-            products.map((product: IProduct) => (
+            items.length ? items.map((product: IProduct) => (
               <Card
                 key={product.id}
                 hoverable
@@ -114,7 +104,7 @@ export const ProductsPage = () => {
                   description={`Price: $${product.price}`}
                 />
               </Card>
-            ))
+            )) : <div>Нет данных</div>
           )}
         </div>
       </div>

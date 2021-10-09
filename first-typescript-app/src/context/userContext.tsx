@@ -6,6 +6,7 @@ interface IProps {
 }
 
 interface IUser {
+  _id: string;
   accessToken: string;
   email: string;
   firstName: string;
